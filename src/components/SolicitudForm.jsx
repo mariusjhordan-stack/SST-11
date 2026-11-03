@@ -47,19 +47,19 @@ function SolicitudForm({ onAgregarSolicitud }) {
   }
 
   const claseCampo = (nombre) =>
-    `mt-1.5 w-full rounded-xl border bg-white px-3.5 py-2.5 text-sm text-slate-800 shadow-sm shadow-slate-900/[0.02] outline-none transition placeholder:text-slate-400 focus:border-emerald-600 focus:ring-4 focus:ring-emerald-600/10 ${
+    `mt-1 w-full rounded-md border bg-white px-3 py-2 text-xs text-[#1C2623] outline-none transition placeholder:text-[#9AA39F] focus:border-[#0F766E] focus:ring-2 focus:ring-[#0F766E]/10 ${
       errores[nombre]
-        ? 'border-rose-300 focus:border-rose-500 focus:ring-rose-500/10'
-        : 'border-slate-200'
+        ? 'border-[#C8321E] focus:border-[#C8321E] focus:ring-[#C8321E]/10'
+        : 'border-[#DDD9CF]'
     }`
 
   return (
-    <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm shadow-slate-900/[0.03] sm:p-6">
-      <div className="mb-5 flex items-start gap-3">
-        <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-800">
+    <section className="rounded-md border border-[var(--border)] bg-white p-4 sm:p-5">
+      <div className="mb-4 flex items-start gap-2.5">
+        <span className="flex size-8 shrink-0 items-center justify-center rounded-md bg-[#E4F1ED] text-[#0F766E]">
           <svg
             aria-hidden="true"
-            className="size-5"
+            className="size-4"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -73,19 +73,19 @@ function SolicitudForm({ onAgregarSolicitud }) {
           </svg>
         </span>
         <div>
-          <h2 className="text-base font-semibold text-slate-900">
-            Nueva solicitud
+          <h2 className="text-sm font-semibold text-[#1C2623]">
+            Registrar solicitud
           </h2>
-          <p className="mt-0.5 text-xs leading-5 text-slate-500">
-            Cuéntanos qué necesitas y te ayudaremos.
+          <p className="mt-0.5 text-[10px] leading-4 text-[#7B8581]">
+            Completa los datos para crear un caso.
           </p>
         </div>
       </div>
 
-      <form className="space-y-4" onSubmit={enviarSolicitud}>
+      <form className="space-y-3" onSubmit={enviarSolicitud}>
         <div>
-          <label className="text-xs font-semibold text-slate-700" htmlFor="titulo">
-            Título <span className="text-rose-500">*</span>
+          <label className="text-[10px] font-medium text-[#48534E]" htmlFor="titulo">
+            Asunto <span className="text-[#C8321E]">*</span>
           </label>
           <input
             autoComplete="off"
@@ -94,12 +94,12 @@ function SolicitudForm({ onAgregarSolicitud }) {
             maxLength={90}
             name="titulo"
             onChange={actualizarCampo}
-            placeholder="Ej. No puedo acceder al sistema"
+            placeholder="Ej. Acceso al sistema"
             required
             value={campos.titulo}
           />
           {errores.titulo && (
-            <p className="mt-1.5 text-xs text-rose-600" role="alert">
+            <p className="mt-1 text-[10px] text-[#C8321E]" role="alert">
               {errores.titulo}
             </p>
           )}
@@ -107,24 +107,24 @@ function SolicitudForm({ onAgregarSolicitud }) {
 
         <div>
           <label
-            className="text-xs font-semibold text-slate-700"
+            className="text-[10px] font-medium text-[#48534E]"
             htmlFor="descripcion"
           >
-            Descripción <span className="text-rose-500">*</span>
+            Descripción <span className="text-[#C8321E]">*</span>
           </label>
           <textarea
-            className={`${claseCampo('descripcion')} min-h-28 resize-y`}
+            className={`${claseCampo('descripcion')} min-h-20 resize-y`}
             id="descripcion"
             maxLength={500}
             name="descripcion"
             onChange={actualizarCampo}
-            placeholder="Describe el problema y los pasos que ya intentaste..."
+            placeholder="Describe brevemente el problema..."
             required
             rows={4}
             value={campos.descripcion}
           />
           {errores.descripcion && (
-            <p className="mt-1.5 text-xs text-rose-600" role="alert">
+            <p className="mt-1 text-[10px] text-[#C8321E]" role="alert">
               {errores.descripcion}
             </p>
           )}
@@ -132,10 +132,10 @@ function SolicitudForm({ onAgregarSolicitud }) {
 
         <div>
           <label
-            className="text-xs font-semibold text-slate-700"
+            className="text-[10px] font-medium text-[#48534E]"
             htmlFor="solicitante"
           >
-            Nombre del solicitante <span className="text-rose-500">*</span>
+            Solicitante <span className="text-[#C8321E]">*</span>
           </label>
           <input
             autoComplete="name"
@@ -144,45 +144,63 @@ function SolicitudForm({ onAgregarSolicitud }) {
             maxLength={80}
             name="solicitante"
             onChange={actualizarCampo}
-            placeholder="Tu nombre y apellido"
+            placeholder="Nombre y apellido"
             required
             value={campos.solicitante}
           />
           {errores.solicitante && (
-            <p className="mt-1.5 text-xs text-rose-600" role="alert">
+            <p className="mt-1 text-[10px] text-[#C8321E]" role="alert">
               {errores.solicitante}
             </p>
           )}
         </div>
 
-        <div>
-          <label
-            className="text-xs font-semibold text-slate-700"
-            htmlFor="prioridad"
-          >
+        <fieldset>
+          <legend className="mb-1.5 text-[10px] font-medium text-[#48534E]">
             Prioridad
-          </label>
-          <select
-            className={`${claseCampo('prioridad')} cursor-pointer`}
-            id="prioridad"
-            name="prioridad"
-            onChange={actualizarCampo}
-            value={campos.prioridad}
-          >
-            <option value="baja">Baja · Puede esperar</option>
-            <option value="media">Media · Afecta mi trabajo</option>
-            <option value="alta">Alta · Necesito atención pronto</option>
-          </select>
-        </div>
+          </legend>
+          <div className="grid grid-cols-3 gap-1 rounded-md border border-[#DDD9CF] bg-[#F7F6F2] p-1">
+            {[
+              { valor: 'baja', etiqueta: 'Baja', color: '#8A948F' },
+              { valor: 'media', etiqueta: 'Media', color: '#D98A0B' },
+              { valor: 'alta', etiqueta: 'Alta', color: '#C8321E' },
+            ].map((prioridad) => (
+              <label
+                className={`flex cursor-pointer items-center justify-center gap-1 rounded-[4px] px-1.5 py-1.5 text-[10px] transition-colors ${
+                  campos.prioridad === prioridad.valor
+                    ? 'bg-white font-semibold text-[#1C2623] shadow-[0_1px_2px_rgba(28,38,35,0.09)]'
+                    : 'text-[#6A7571] hover:text-[#1C2623]'
+                }`}
+                htmlFor={`prioridad-${prioridad.valor}`}
+                key={prioridad.valor}
+              >
+                <input
+                  checked={campos.prioridad === prioridad.valor}
+                  className="sr-only"
+                  id={`prioridad-${prioridad.valor}`}
+                  name="prioridad"
+                  onChange={actualizarCampo}
+                  type="radio"
+                  value={prioridad.valor}
+                />
+                <span
+                  className="size-1.5 rounded-full"
+                  style={{ backgroundColor: prioridad.color }}
+                />
+                {prioridad.etiqueta}
+              </label>
+            ))}
+          </div>
+        </fieldset>
 
         <button
-          className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-700 px-4 py-2.5 text-sm font-semibold text-white shadow-sm shadow-emerald-900/10 transition hover:bg-emerald-800 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-emerald-600/25 active:translate-y-px"
+          className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-[#0F766E] px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-[#0B625B] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0F766E] focus-visible:ring-offset-2 active:translate-y-px"
           type="submit"
         >
-          Enviar solicitud
+          Registrar
           <svg
             aria-hidden="true"
-            className="size-4"
+            className="size-3.5"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -195,8 +213,8 @@ function SolicitudForm({ onAgregarSolicitud }) {
             />
           </svg>
         </button>
-        <p className="text-center text-[11px] leading-4 text-slate-400">
-          Los campos marcados con * son obligatorios.
+        <p className="text-center text-[9px] leading-4 text-[#8A948F]">
+          Los campos con * son obligatorios.
         </p>
       </form>
     </section>

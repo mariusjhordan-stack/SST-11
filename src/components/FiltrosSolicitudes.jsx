@@ -1,40 +1,48 @@
 function FiltrosSolicitudes({ filtros, filtroActual, conteos, onSetFiltro }) {
   return (
-    <div
-      aria-label="Filtrar solicitudes por estado"
-      className="flex gap-1 overflow-x-auto rounded-xl border border-slate-200 bg-slate-100/80 p-1"
-      role="group"
-    >
-      {filtros.map((filtro) => {
-        const seleccionado = filtroActual === filtro
+    <nav aria-label="Cola de trabajo" className="mt-5 lg:mt-10">
+      <p className="mb-2 px-1 text-[9px] font-semibold tracking-[0.14em] text-[#8FA39B] lg:px-2">
+        COLA DE TRABAJO
+      </p>
+      <div
+        aria-label="Filtrar solicitudes por estado"
+        className="grid grid-cols-2 gap-1 pb-0.5 sm:grid-cols-4 lg:flex lg:flex-col"
+        role="group"
+      >
+        {filtros.map((filtro) => {
+          const seleccionado = filtroActual === filtro
 
-        return (
-          <button
-            aria-pressed={seleccionado}
-            className={`inline-flex shrink-0 items-center gap-2 rounded-lg px-3 py-2 text-xs font-medium transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-emerald-600/15 sm:px-3.5 ${
-              seleccionado
-                ? 'bg-white text-slate-900 shadow-sm ring-1 ring-slate-200/80'
-                : 'text-slate-500 hover:bg-white/70 hover:text-slate-800'
-            }`}
-            key={filtro}
-            onClick={() => onSetFiltro(filtro)}
-            type="button"
-          >
-            {/* La selección vuelve a App, donde cambia el filtro y se calcula la lista visible. */}
-            {filtro}
-            <span
-              className={`rounded-md px-1.5 py-0.5 text-[10px] tabular-nums ${
+          return (
+            <button
+              aria-pressed={seleccionado}
+              className={`inline-flex min-h-9 min-w-0 items-center justify-between gap-2 rounded-md px-2.5 text-[11px] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2DB5A3] lg:w-full ${
                 seleccionado
-                  ? 'bg-emerald-50 text-emerald-800'
-                  : 'bg-slate-200/70 text-slate-500'
+                  ? 'bg-[#23362F] font-medium text-white'
+                  : 'text-[#C5D1CC] hover:bg-[#1E3029] hover:text-white'
               }`}
+              key={filtro}
+              onClick={() => onSetFiltro(filtro)}
+              type="button"
             >
-              {conteos[filtro]}
-            </span>
-          </button>
-        )
-      })}
-    </div>
+              <span className="inline-flex items-center gap-2">
+                {seleccionado && (
+                  <span className="size-1.5 rounded-full bg-[#2DB5A3]" />
+                )}
+                {!seleccionado && <span className="size-1.5" />}
+                {filtro}
+              </span>
+              <span
+                className={`font-mono text-[10px] tabular-nums ${
+                  seleccionado ? 'text-[#C5D1CC]' : 'text-[#8FA39B]'
+                }`}
+              >
+                {conteos[filtro]}
+              </span>
+            </button>
+          )
+        })}
+      </div>
+    </nav>
   )
 }
 
